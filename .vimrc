@@ -1,4 +1,4 @@
-"
+
 " A (not so) minimal vimrc.
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
@@ -183,4 +183,3 @@ nnoremap <leader><Up> :cprev<CR>
 nnoremap <leader><Down> :cnext<CR>
 nnoremap <leader><Right> :cnf<CR>
 nnoremap <leader>c :cclose<CR>
-nnoremap <leader>o :copen<CR>
