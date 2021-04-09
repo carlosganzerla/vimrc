@@ -1,4 +1,4 @@
-
+"
 " A (not so) minimal vimrc.
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
@@ -17,15 +17,13 @@ set softtabstop =4         " Tab key indents by 4 spaces.
 set shiftwidth  =4         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
-set spell spelllang=en_us   " Spell checker
+" set spell spelllang=en_us   " Spell checker
+set nospell
 
 set number " Show line numbers
 
 set colorcolumn=80 " Vertical ruler
 
-" Tab switching
-nnoremap H gT
-nnoremap L gt
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
 set hidden                 " Switch between buffers without having to save first.
@@ -34,15 +32,6 @@ set display     =lastline  " Show as much as possible of the last line.
 
 set showmode               " Show current mode in command-line.
 set showcmd                " Show already typed keys when more are expected.
-
-" Word wrap, line break and force text width on markdown files
-au BufRead,BufNewFile *.md 
-            \ setlocal textwidth=79
-            \ | setlocal wrap
-            \ | setlocal linebreak
-            \ | setlocal nolist
-            \ | setlocal filetype=markdown
-set fo-=l
 
 set incsearch              " Highlight while searching with / or ?.
 set hlsearch               " Keep matches highlighted.
@@ -82,34 +71,27 @@ noremap <F6> :source ~/.vimrc<CR>
 
 
 call plug#begin('~/vim/plugged')
-
-
 Plug 'tomasiser/vim-code-dark'
-
-
-Plug 'sheerun/vim-polyglot'
-
 if !has('nvim')
     Plug 'rhysd/vim-healthcheck'
-
-
 Plug 'preservim/nerdtree'
-
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 Plug 'jremmen/vim-ripgrep'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'ionide/Ionide-vim', {
+      \ 'do':  'make fsautocomplete',
+      \}
+Plug 'kamykn/spelunker.vim'
 endif
-
-
 call plug#end()
 
-" VS Code like colors
+" Disable mouse
 set mouse=
 set ttymouse=
+
+" VS Code like colors
 set t_Co=256
 set t_ut=
 colorscheme codedark
@@ -121,48 +103,22 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 
-" Node JS Syntax highlighting
-set runtimepath^=~/.vim/bundle/node
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_completion_autoimport = 1
-let g:ale_fixers = {
-  \ 'javascript': ['eslint'],
-  \ 'javascriptreact': ['eslint'],
-  \ 'typescript': ['eslint'],
-  \ 'typescriptreact': ['eslint']
-  \}
-
 " Leader key
 let mapleader=","
 
 " Nerd tree bindings
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <C-b> :NERDTreeToggle<CR>
 
-" Switch buffers using tabs
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-nnoremap <S-x> :bd<CR>
+" Vs Code bindings
+nnoremap <Leader>w <C-w>
+nnoremap <C-PageUp> :bnext<CR>
+nnoremap <C-PageDown> :bprevious<CR>
+nnoremap <C-w> :bd<CR>
 
  " Load .vimrc onto another buffer
 nnoremap <leader>rc :e ~/.vimrc<CR>
 
- " LSP mappings
-nnoremap <leader>le :LspNextError<CR>
-nnoremap <leader>lh :LspHover<CR>
-nnoremap <F12> :LspDefinition<CR>
-nnoremap <leader>ld :LspDocumentDiagnostics<CR>
-
- " Quick list bindings
-" nnoremap <leader>qn :lnext<CR>
-" nnoremap <leader>qo :lopen<CR>
-" nnoremap <leader>qp :lprev<CR>
-" nnoremap <leader>qc :lclose<CR>
-
-" Run ESLINT on save for js files
+" Run ESLINT
 command! Eslint 
             \ execute 'silent !eslint %:p --quiet --fix'
             \ | redraw!
@@ -179,7 +135,4 @@ nnoremap <C-s> :w<CR>
 " Redraw on Ctrl F5
 nnoremap <C-F5> :redraw!<CR>
 
-nnoremap <leader><Up> :cprev<CR>
-nnoremap <leader><Down> :cnext<CR>
-nnoremap <leader><Right> :cnf<CR>
-nnoremap <leader>c :cclose<CR>
+
