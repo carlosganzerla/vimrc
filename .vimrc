@@ -1,4 +1,3 @@
-"
 " A (not so) minimal vimrc.
 "
  "You want Vim, not vi. When Vim finds a vimrc, 'nocompatible' is set anyway.
@@ -24,7 +23,7 @@ set number " Show line numbers
 
 set colorcolumn=80 " Vertical ruler
 
-" Markdown shite 
+" Markdown shite
 set fo -=l
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -82,7 +81,8 @@ Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdcommenter'
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
 endif
 call plug#end()
 
@@ -118,7 +118,7 @@ nnoremap <C-w> :bd<CR>
 nnoremap <leader>rc :e ~/.vimrc<CR>
 
 " Run ESLINT
-command! Eslint 
+command! Eslint
             \ execute 'silent !eslint %:p --quiet --fix'
             \ | redraw!
 
@@ -138,13 +138,13 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
-  \ 'coc-eslint', 
-  \ 'coc-prettier', 
-  \ 'coc-json', 
-  \ 'coc-fsharp', 
-  \ 'coc-pyright', 
-  \ 'coc-css', 
-  \ 'coc-markdownlint', 
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-pyright',
+  \ 'coc-fsharp',
+  \ 'coc-css',
+  \ 'coc-markdownlint',
   \ ]
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -254,3 +254,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " List only non ignored files in CTRL P fuzzy find
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" SET ENCONDING TO UTF8 ALWAYS
+set fileencodings=utf-8
