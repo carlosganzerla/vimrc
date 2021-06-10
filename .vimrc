@@ -22,6 +22,8 @@ set nospell
 " Show line numbers
 " set number
 set relativenumber
+set cursorline
+set number
 set rnu
 
 set colorcolumn=80 " Vertical ruler
@@ -79,7 +81,6 @@ Plug 'tomasiser/vim-code-dark'
 if !has('nvim')
     Plug 'rhysd/vim-healthcheck'
 Plug 'preservim/nerdtree'
-Plug 'jremmen/vim-ripgrep'
 Plug 'kamykn/spelunker.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
@@ -287,3 +288,11 @@ function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+
+"Disable arrows
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+"" Go back to normal in :norm : C-v ESC
